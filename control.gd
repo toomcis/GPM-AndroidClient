@@ -3,30 +3,45 @@ extends Control
 @onready var TextLabel = $RichTextLabel
 @onready var TextInput = $LineEdit
 @onready var ConnectButton = $Button
+@onready var MessageString = $StringSend
+@onready var GyroCoolDown = $Timer
+
 var PastGyro = Vector3.ZERO
-var multiplayer_peer := WebSocketMultiplayerPeer.new()
+var PORT = 7183
+var multiplayer_peer = ENetMultiplayerPeer.new()
+
 
 func _ready():
 	set_process(true)
 
-func _physics_process(delta: float) -> void:
-	if multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED:
-		var Gyro = Input.get_gyroscope()
-		TextLabel.text = str(Gyro) + " | Gyro = " + str(PastGyro - Gyro)
-		PastGyro = Gyro
-
-		rpc_id(1, "send_gyro_data", Gyro)
-		rpc_id(1, "send_string", "Hello World!")
-
 func _on_button_pressed() -> void:
-	var websocket_url = "ws://" + str(TextInput.text) + ":7183"
-	connect_to_websocket(websocket_url)
-
-func connect_to_websocket(url: String):
-	var err = multiplayer_peer.create_client(url)
+	var err = multiplayer_peer.create_client(str(TextInput.text), PORT)
 	if err != OK:
-		print("❌ Failed to connect to WebSocket server | URL = " + url)
+		print("❌ Failed to connect to WebSocket server | URL = " + str(TextInput.text))
 	else:
 		print("🔌 Connecting...")
 		multiplayer.multiplayer_peer = multiplayer_peer
-		rpc_id(1, "send_string", "Hello World!")
+		await get_tree().create_timer(1).timeout
+		send_print.rpc_id(1)
+		send_string.rpc_id(1, "Recieved connection")
+		TextLabel.text = "Connected secesfully to " + TextInput.text
+
+@rpc("any_peer")
+func send_print():
+	pass
+
+@rpc("any_peer")
+func send_string():
+	pass
+
+@rpc("any_peer")
+func send_gyro(Gyro):
+	pass
+
+func _on_send_pressed() -> void:
+	send_string.rpc_id(1, MessageString.text)
+	TextLabel.text = "Sent message: " + MessageString.text
+
+func _process(delta: float) -> void:
+	var Gyro = Input.get_gyroscope()
+	send_gyro.rpc_id(1, Gyro)
