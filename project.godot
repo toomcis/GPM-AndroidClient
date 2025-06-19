@@ -11,19 +11,27 @@ config_version=5
 [application]
 
 config/name="GPM Android Client"
-run/main_scene="uid://dkfs0mdtf11y3"
+run/main_scene="uid://nih58djqw0gt"
 config/features=PackedStringArray("4.4", "Mobile")
 boot_splash/bg_color=Color(0.0862745, 0.0862745, 0.101961, 1)
 config/icon="res://icon.svg"
 
+[autoload]
+
+Globals="*res://Globals.gd"
+
 [display]
 
-window/size/viewport_width=180
-window/size/viewport_height=320
+window/size/viewport_width=270
+window/size/viewport_height=600
 window/size/resizable=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
+
+[editor]
+
+version_control/autoload_on_startup=true
 
 [input_devices]
 

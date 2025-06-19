@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkfs0mdtf11y3"]
+
+[ext_resource type="Script" uid="uid://dbk8iofp1horn" path="res://Scenes/ServerSelect/ServerSelect.gd" id="1_4sxy3"]
+
+[node name="MainScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4sxy3")
+
+[node name="ServerList" type="ItemList" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 53.0
+offset_bottom = -164.0
+grow_horizontal = 2
+grow_vertical = 2
+item_count = 1
+item_0/text = "ERROR LOADING IP FROM FILE"
+
+[node name="AddButton" type="Button" parent="."]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
+top_level = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -83.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Add server"
+
+[node name="RemoveButton" type="Button" parent="."]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
+top_level = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -163.0
+offset_right = 1.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Remove server"
+
+[connection signal="item_activated" from="ServerList" to="." method="_on_server_list_item_activated"]
+[connection signal="pressed" from="AddButton" to="." method="_on_serveradd_button_pressed"]
+[connection signal="pressed" from="RemoveButton" to="." method="_on_remove_button_pressed"]

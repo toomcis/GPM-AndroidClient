@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://nih58djqw0gt"]
+
+[ext_resource type="Script" uid="uid://bie1wx5yl4xbc" path="res://Scenes/main_menu.gd" id="1_tt5f1"]
+[ext_resource type="Script" uid="uid://cykehnss75gl" path="res://Scenes/ControllingGUI/trail.gd" id="2_853f1"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_8saeu"]
+
+[sub_resource type="Gradient" id="Gradient_la4sr"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ghw46"]
+gradient = SubResource("Gradient_la4sr")
+
+[sub_resource type="Curve" id="Curve_df05h"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tt5f1")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 71.0
+offset_right = 272.0
+offset_bottom = 194.0
+text = "GYRO PER MINUTE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 474.0
+offset_right = 216.0
+offset_bottom = 559.0
+text = "Join Server"
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(133, 330)
+scale = Vector2(40, 40)
+
+[node name="PlayerMesh" type="MeshInstance2D" parent="Player"]
+position = Vector2(-3.72529e-09, -1.975)
+mesh = SubResource("SphereMesh_8saeu")
+texture = SubResource("GradientTexture1D_ghw46")
+
+[node name="Trail" type="Line2D" parent="Player/PlayerMesh"]
+top_level = true
+points = PackedVector2Array(2.38419e-07, 0.0500002)
+width = 40.0
+width_curve = SubResource("Curve_df05h")
+script = ExtResource("2_853f1")
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
