@@ -16,7 +16,7 @@ gradient = SubResource("Gradient_la4sr")
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Settings" type="Control"]
+[node name="MainScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,13 +30,14 @@ visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_lock_ = true
 
 [node name="ColorPicker" type="ColorPicker" parent="Elements"]
 layout_mode = 0
-offset_left = 15.0
-offset_top = 9.0
-offset_right = 313.0
-offset_bottom = 378.0
+offset_left = 2.0
+offset_top = 35.0
+offset_right = 337.0
+offset_bottom = 405.0
 scale = Vector2(0.8, 0.8)
 edit_alpha = false
 picker_shape = 2
@@ -45,6 +46,7 @@ sampler_visible = false
 color_modes_visible = false
 hex_visible = false
 presets_visible = false
+metadata/_edit_lock_ = true
 
 [node name="Buttons" type="Control" parent="."]
 anchors_preset = 0
@@ -52,51 +54,57 @@ offset_left = 10.0
 offset_top = 23.0
 offset_right = 50.0
 offset_bottom = 63.0
+metadata/_edit_lock_ = true
 
 [node name="ChangeColor" type="Button" parent="Buttons"]
 layout_mode = 0
 offset_left = 63.0
-offset_top = 26.0
-offset_right = 175.0
-offset_bottom = 89.0
+offset_top = 40.0
+offset_right = 183.0
+offset_bottom = 100.0
 text = "Change Color"
+metadata/_edit_lock_ = true
 
 [node name="Disconnect" type="Button" parent="Buttons"]
 layout_mode = 0
-offset_left = 64.0
-offset_top = 100.0
-offset_right = 176.0
-offset_bottom = 163.0
+offset_left = 63.0
+offset_top = 120.0
+offset_right = 183.0
+offset_bottom = 180.0
 text = "Disconnect"
+metadata/_edit_lock_ = true
 
 [node name="BackButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 76.0
-offset_top = 521.0
-offset_right = 178.0
-offset_bottom = 585.0
+offset_left = 85.0
+offset_top = 500.0
+offset_right = 185.0
+offset_bottom = 550.0
 text = "Back"
+metadata/_edit_lock_ = true
 
 [node name="Confirm" type="Button" parent="."]
 visible = false
 layout_mode = 0
 offset_left = 45.0
-offset_top = 32.0
-offset_right = 219.0
-offset_bottom = 123.0
+offset_top = 30.0
+offset_right = 225.0
+offset_bottom = 120.0
 text = "Are you sure?"
+metadata/_edit_lock_ = true
 
 [node name="Yes" type="Button" parent="Confirm"]
 layout_mode = 0
-offset_left = 29.0
-offset_top = 406.0
-offset_right = 131.0
-offset_bottom = 470.0
+offset_left = 40.0
+offset_top = 120.0
+offset_right = 140.0
+offset_bottom = 170.0
 text = "Confirm"
+metadata/_edit_lock_ = true
 
 [node name="Player" type="Node2D" parent="."]
-position = Vector2(127, 396)
-scale = Vector2(40, 40)
+position = Vector2(135, 415)
+scale = Vector2(30, 30)
 
 [node name="PlayerMesh" type="MeshInstance2D" parent="Player"]
 position = Vector2(-3.72529e-09, -1.975)
@@ -106,7 +114,7 @@ texture = SubResource("GradientTexture1D_2ppyf")
 [node name="Trail" type="Line2D" parent="Player/PlayerMesh"]
 top_level = true
 points = PackedVector2Array(2.38419e-07, 0.0500002)
-width = 40.0
+width = 30.0
 width_curve = SubResource("Curve_la4sr")
 script = ExtResource("2_la4sr")
 

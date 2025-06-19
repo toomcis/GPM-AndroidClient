@@ -36,3 +36,8 @@ func _on_add_button_pressed() -> void:
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/ServerSelect/ServerSelectScreen.tscn")
+
+
+func _on_direct_pressed() -> void:
+	Globals.connected_IP = addIPField.text
+	get_tree().change_scene_to_file("res://Scenes/ControllingGUI/MainScreen.tscn")

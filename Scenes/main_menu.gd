@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	$Player.rotation = rotationOfPlayer
-	rotationOfPlayer += 0.1
+	rotationOfPlayer += 10 * delta
 
 func updatePlayerColor():
 	$Player/PlayerMesh.texture.gradient.set_color(0, Globals.color)

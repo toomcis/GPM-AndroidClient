@@ -4,26 +4,38 @@ var rotationOfPlayer = 0
 
 
 func _ready() -> void:
+	#multiplayer.set_root_node(self)
 	updatePlayerColor()
 
 
 func _process(delta: float) -> void:
 	$Player.rotation = rotationOfPlayer
-	rotationOfPlayer += 0.1
+	rotationOfPlayer += 10 * delta
 
 
 func updatePlayerColor():
 	$Player/PlayerMesh.texture.gradient.set_color(0, Globals.color)
 	$Player/PlayerMesh/Trail.default_color = Globals.color
-	sentPlayerColor.rpc_id(1, Globals.color)
+	sentPlayerColor.rpc(Globals.color)
 
-@rpc
-func sentPlayerColor():
+@rpc("any_peer")
+func sentPlayerColor(_color):
+	pass
+
+@rpc("authority")
+func getInfo(_information):
+	pass
+
+@rpc("any_peer")
+func send_gyro(_GyroData):
+	pass
+
+@rpc("any_peer")
+func send_print():
 	pass
 
 func _on_color_picker_color_changed(color: Color) -> void:
 	Globals.color = color
-	print("Changed color to: " + str(Globals.color))
 	updatePlayerColor()
 
 
@@ -52,6 +64,9 @@ func _on_disconnect_pressed() -> void:
 
 func _on_yes_pressed() -> void:
 	Globals.connected_IP = null
+	Globals.settingsOpen = false
+	if multiplayer.connected_to_server:
+		multiplayer.multiplayer_peer.disconnect_peer(1)
 	get_tree().change_scene_to_file("res://Scenes/ServerSelect/ServerSelectScreen.tscn")
 
 
